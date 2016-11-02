@@ -1,0 +1,5 @@
+[
+    {title: "Waterloo Sunset Revisited", author: "Penny Q Lane", body: "One two three four, that's the whole score.", image: "https://images.unsplash.com/photo-1456374407032-6e4baf58fb62?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=d192a7f9e7b85671d2d4a502842b320c",faves: 42},
+
+    {title: "Call Me Ishmael, Maybe", author: "Melville Rae Jepsen", body: "One never knows whether tis nobler in the mind to suffer the slings and arrows of outrageous fortune or to spend a few lifetimes exhuming corpses from the rotten putrescence of the bog. At any rate, I could never quite tell where we stood on that score.", image: "https://images.unsplash.com/photo-1456374407032-6e4baf58fb62?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=d192a7f9e7b85671d2d4a502842b320c", faves: 5}
+]
