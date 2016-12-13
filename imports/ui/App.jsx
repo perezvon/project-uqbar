@@ -14,7 +14,7 @@ export default class App extends Component {
     
     getMeteorData () {
         return {
-            isAuthenticated: Meteor.userId() !== null
+            isAuthenticated: !!Meteor.userId()
         };
     }
     
@@ -39,7 +39,7 @@ export default class App extends Component {
     render () {
         return (
             <div className="flex-container">
-                <Navigation />
+                <Navigation auth={this.state.isAuthenticated} />
                 {this.props.children}
             </div>
         )

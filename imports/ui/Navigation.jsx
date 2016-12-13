@@ -11,7 +11,7 @@ export default class Navigation extends Component {
                     <Link to="dashboard"><li>dashboard</li></Link>
                     <Link to="new"><li>new post</li></Link>
                 </ul>
-                <Avatar />
+                <Avatar auth={this.props.auth}/>
             </div>
         )
     }

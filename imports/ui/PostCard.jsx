@@ -1,7 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { Posts } from '../api/posts.js';
-
+import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 
 export default class PostCard extends Component {
     render () {
@@ -20,9 +18,9 @@ export default class PostCard extends Component {
     </div>
        
     <div className="story-preview">
-      {this.props.body}
+      {this.props.preview}
        <div className="story-faves">
-      Faves: {this.props.faves}
+      <img src="/star.svg" /> {this.props.faves}
       </div>
       </div>
       
@@ -34,6 +32,5 @@ export default class PostCard extends Component {
 }
 
 PostCard.propTypes = {
-    title: PropTypes.string.isRequired,
-    body: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired
 };

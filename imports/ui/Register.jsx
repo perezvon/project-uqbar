@@ -43,10 +43,10 @@ export default class Register extends Component {
     render () {
         return (
             <div>
-                <div className="h2 flex-row">
+                <div className="h2">
                     Register
                 </div>
-                <div className="flex-container">
+                <div className="flex-row">
                     <form className="register" onSubmit={this.handleSubmit}>
                         <div className="form-control">
                         <label htmlFor="signup-username">Username: </label>
@@ -68,8 +68,9 @@ export default class Register extends Component {
                         <label htmlFor="signup-newsletter">Newsletter: </label>
                         <input type="checkbox" className="square-checkbox" id="signup-newsletter" value="newsletter" checked />
                         </div>
-                        <input className="pu-button" type="submit" value="register" />  
+                        <input className="pu-button" type="submit" value="register" /> 
                     </form>
+                    <div className="login-link">Already Registered? <Link to="login">Login</Link></div>
                 </div>
             </div>
         )

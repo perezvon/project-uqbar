@@ -17,7 +17,7 @@ export default class Login extends Component {
             if (err) {
                 Bert.alert(err.reason, 'danger');
             } else {
-                Bert.alert("Welcome back, " + username + "!");
+                Bert.alert("Welcome back, " + username + "!", 'success');
                 browserHistory.push('/');
             }
         })
@@ -38,7 +38,7 @@ export default class Login extends Component {
                     </div>
                     <input type="submit" className="pu-button" value="Login" />
                 </form>
-                <div className="register">New User? <Link to="register">Register</Link></div>
+                <div className="register-link">New User? <Link to="register">Register</Link></div>
             </div>
         )
     }

@@ -1,49 +1,65 @@
 
 import React, { Component, PropTypes } from 'react'
-import {Editor, EditorState} from 'draft-js'
+import  { Editor, getCurrentContent, convertToRaw, EditorState } from 'draft-js'
+import { newPost } from '../api/posts/methods'
 
 export default class PostEditor extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {editorState: EditorState.createEmpty()};
-    this.onChange = (editorState) => this.setState({editorState});
-    this.focus = () => this.refs.editor.focus();
-    this.saveDraft = () => console.log(this.state.editorState.toJS());
+  constructor (props) {  
+    super (props);
+      this.state = {editorState: EditorState.createEmpty()};
+      this.onChange = (editorState) => this.setState({editorState});
+      this.saveDraft = (e) => {
+        e.preventDefault();
+        console.log(this.state.editorState.getCurrentContent()); //will want to save to localStorage
+      }
       this.generateSlug = () => {
           let text = document.getElementById("post-title").value;
           let slug = Meteor.user().username + '/' + getSlug(text);
-          // give slug value to slug form element
-          console.log(slug);
+          document.getElementById("post-slug").value = slug;
+      }
+      this.handleSubmit = (e) => {
+          e.preventDefault();
+          let raw = this.state.editorState.getCurrentContent();
+          let body = JSON.stringify(convertToRaw(raw));
+          let title = document.getElementById("post-title").value;
+          let slug = document.getElementById("post-slug").value;
+          let author = Meteor.userId();
+          let preview = document.getElementById("post-preview").value;
+          let data = {title: title, body: body, author: author, slug: slug, preview: preview};
+          //console.log(data);
+          Meteor.call('newPost', data);
       }
   }
-    
-  render() {
+  render () {
     const {editorState} = this.state;
     return (
         <div>
-            <form id="post-edit-form">
+            <form id="post-edit-form" onSubmit={this.handleSubmit}>
         <div className="form-control">
             <label htmlFor="post-title">Title: </label>
             <input type="text" id="post-title" className="form-input" onChange={this.generateSlug}/>
         </div>
-        <div className="editor-container">
-        <div className="editor" onClick={this.focus}>
-        <Editor 
-            editorState={editorState} 
-            onChange={this.onChange} 
-            ref="editor"
-        />
+                <div className="form-control">
+            <label htmlFor="post-preview">Subtitle / Preview: </label>
+            <input type="text" id="post-preview" className="form-input" />
         </div>
-            <input
+        <div className="form-control hidden">
+            <label htmlFor="post-slug">Slug: </label>
+            <input type="text" id="post-slug" className="form-input" />
+        </div>
+      <Editor 
+          editorState={editorState} 
+          onChange={this.onChange}
+          placeholder="Start writing..."
+      />
+                        <input
                 className="pu-button"
-                onClick={this.saveDraft}
-                type="button"
+                type="submit"
                 value="Save Draft"
               />
-        </div>
-                </form>
-        </div>
-        );
+            </form>
+    </div>
+        )
   }
+    
 }
-

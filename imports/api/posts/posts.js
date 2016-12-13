@@ -60,6 +60,12 @@ let PostsSchema = new SimpleSchema({
     label: "The body of this post.",
     optional: true
   },
+    
+    "preview": {
+        type: String,
+        label: "A preview of the post.",
+        optional: true
+    },
   "tags": {
     type: [ String ],
     label: "The tags for this post.",
@@ -78,6 +84,7 @@ let PostsSchema = new SimpleSchema({
     "updatedAt": {
     type: String,
     label: "The date this post was last updated on.",
+        optional: true,
     autoValue () {
             if ( this.isUpdate ) {
                 return new Date;
