@@ -11,7 +11,7 @@ body {
 .header {
   position: fixed;
     top: 0;
-  width: 100%;
+  width: 100vw;
   height: 65px;
 }
 
@@ -131,8 +131,8 @@ p {
 }
 
 .editor-container {
-    padding: 20;
-    width: 600;
+  border: 1px solid $pu-bright-blue;
+  padding: 15px;
 }
 
 .editor {
@@ -142,44 +142,10 @@ p {
     cursor: text;
     minHeight: 80;
     padding: 10;
-      &:focus{
-        background: #fff;
-        box-shadow: 0;
-        border: 3px solid $pu-bright-blue;
-        padding: 10px;
-        outline: none;
-    }
-}
 
-.DraftEditor-root {
-  /* Stop collapsing margins breaking our side control positioning */
-  padding-top: 1px;
-  position: relative;
-    padding: 20;
-    width: 600;
-}
-
-.DraftEditor-editorContainer {
-    color: black;
-    cursor: text;
-    minHeight: 80;
-    padding: 10;
-      &:focus{
-	background: #fff;
-	box-shadow: 0;
-	border: 3px solid $pu-bright-blue;
-	padding: 10px;
-	outline: none;
-}
-}
-
-.public-DraftEditorPlaceholder-root {
-  position: absolute;
-    color: black;
 }
 
 .story {
-  width: 55vw;
   height: auto;
   background: whitesmoke;
   margin: 2%;
@@ -193,7 +159,6 @@ p {
   cursor: pointer;
 }
 }
-
 
 .story-img {
   background: no-repeat center;
@@ -260,6 +225,19 @@ p {
 	padding: 10px;
 	outline: none;
 }
+}
+
+#post-title, #post-preview {
+    border: 1px solid $pu-bright-blue;
+}
+
+.view-post {
+    @media screen and (max-width:699px) { 
+  width: 90vw;
+    }
+    @media screen and (min-width:700px) {
+    width: 450px;
+    }
 }
 
 .dropdown-menu {

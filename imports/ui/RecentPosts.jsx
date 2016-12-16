@@ -16,7 +16,7 @@ class RecentPosts extends Component {
         };
     
     render () {
-        return (<div>
+        return (<div className="flex-row">
         <div className="h2">Most Recent Posts</div>
             {this.recentPosts()}
                 </div>

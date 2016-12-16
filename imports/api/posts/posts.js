@@ -44,6 +44,7 @@ let PostsSchema = new SimpleSchema({
     type: String,
     label: "The slug for this post.",
     autoValue () {
+        if(this.isInsert) {
       let slug              = this.value,
           existingSlugCount = Posts.find( { _id: { $ne: this.docId }, slug: slug } ).count(),
           existingUntitled  = Posts.find( { slug: { $regex: /untitled-post/i } } ).count();
@@ -53,6 +54,7 @@ let PostsSchema = new SimpleSchema({
       } else {
         return existingUntitled > 0 ? `untitled-post-${ existingUntitled + 1 }` : 'untitled-post';
       }
+    }
     }
   },
   "body": {
@@ -82,7 +84,7 @@ let PostsSchema = new SimpleSchema({
         denyUpdate: true
     },
     "updatedAt": {
-    type: String,
+    type: Date,
     label: "The date this post was last updated on.",
         optional: true,
     autoValue () {

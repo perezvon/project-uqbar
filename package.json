@@ -11,12 +11,17 @@
     "bcrypt": "^0.8.7",
     "draft-js": "^0.9.1",
     "draft-js-editor": "^1.8.5",
+    "draft-js-export-html": "^0.5.2",
     "draft-wysiwyg": "^0.2.4",
     "meteor-node-stubs": "~0.2.0",
+    "numeral": "^2.0.1",
     "react": "^15.4.1",
     "react-addons-pure-render-mixin": "^15.3.2",
     "react-dom": "^15.4.1",
+    "react-redux": "^5.0.1",
     "react-router": "^3.0.0",
+    "redraft": "^0.7.0",
+    "redux": "^3.6.0",
     "xhr2": "^0.1.3"
   }
 }

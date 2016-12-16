@@ -9,6 +9,7 @@ import Login from '../imports/ui/Login';
 import Dashboard from '../imports/ui/Dashboard';
 import NewPost from '../imports/ui/NewPost';
 import ViewPost from '../imports/ui/ViewPost';
+import ViewDraft from '../imports/ui/ViewDraft';
 import RecentPosts from '../imports/ui/RecentPosts';
 import NotFoundPage from '../imports/ui/NotFoundPage';
 
@@ -30,6 +31,7 @@ export const renderRoutes = () => (
             <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
             <Route path="new" component={NewPost} onEnter={requireAuth} />
             <Route path="/:username/:slug" component={ViewPost} />
+            <Route path="/:username/:slug/draft" component={ViewDraft} />
             <Route path="*" component={NotFoundPage} />
         </Route>
         <Route path="*" component={NotFoundPage} />
