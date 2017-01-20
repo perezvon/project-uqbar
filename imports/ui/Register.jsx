@@ -68,7 +68,7 @@ export default class Register extends Component {
                         <label htmlFor="signup-newsletter">Newsletter: </label>
                         <input type="checkbox" className="square-checkbox" id="signup-newsletter" value="newsletter" checked />
                         </div>
-                        <input className="pu-button" type="submit" value="register" /> 
+                        <input className="pu-button-light" type="submit" value="register" /> 
                     </form>
                     <div className="login-link">Already Registered? <Link to="login">Login</Link></div>
                 </div>

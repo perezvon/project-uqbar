@@ -1,5 +1,5 @@
-import { Meteor } from 'meteor/meteor'
+import { Profiles } from "../users.js" 
 
-Meteor.publish('user-profile', function() {
-return Meteor.users.find({_id : this.userId}, {fields : {profile : 1}});
+Meteor.publish( 'profiles', () => {
+  return Profiles.find();
 });

@@ -8,7 +8,6 @@ export default class PostCard extends Component {
         if (faves > 999) faves = numeral(faves).format('0.0a');
         let image = 'url(' + this.props.image + ')';
         return (
-            <div className="flex-row">
     <div className="story">
      <Link className="story-card" to={this.props.slug}>
   <div className="story-header">
@@ -29,7 +28,6 @@ export default class PostCard extends Component {
       
     </Link>
     </div>
-  </div>
         )
     }
 }

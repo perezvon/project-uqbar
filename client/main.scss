@@ -1,5 +1,9 @@
 @import "variables";
 
+::selection {
+    background: $pu-red-transparent;
+}
+
 body {
     margin: 0;
   background-color: white;
@@ -10,9 +14,11 @@ body {
 
 .header {
   position: fixed;
+    //background-color: rgba(0,0,0,0.8);
     top: 0;
   width: 100vw;
   height: 65px;
+    padding-bottom: 15px;
 }
 
 li {
@@ -40,6 +46,13 @@ li {
     align-items: center;
 }
 
+.hero-title {
+    width: auto;
+    font-family: $font;
+    font-weight: 300;
+    text-align: center;
+}
+
 .flex-container {
     width: 100vw;
     margin-top: 65px;
@@ -50,14 +63,18 @@ li {
 }
 
 .flex-row {
-    width: auto;
+    flex: 1 100%;
 }
 
-.hero-title {
-    width: auto;
-    font-family: $font;
-    font-weight: 300;
+.text-center {
     text-align: center;
+}
+
+@media screen and (min-width:800px) {
+    .half-width-flex {
+        display: inline-flex;
+        width: 50%;
+    }
 }
 
 .h1 {
@@ -71,7 +88,7 @@ li {
 }
 
 .h3 {
-    font-size: 10vh;
+    font-size: 3vh;
     padding: 20px;
     padding-left: 100px;
 }
@@ -81,7 +98,7 @@ li {
     height: 100vh;
 }
 
-.pu-button {
+.pu-button-light {
     color: #fff;
     height: 60px;
     width: 140px;
@@ -99,19 +116,58 @@ li {
       }
 }
 
-.avatar {
+.pu-button-dark {
+    color: $pu-charcoal;
+    height: 60px;
+    width: 140px;
+    font-size: 20px;
+    font-family: $font;
+    font-weight: 300;
+    margin: 10px;
+    border: 1px solid $pu-charcoal;
+    background-color: rgba(0,0,0,0);
+    transition: all 0.5s;
+      &:hover {
+        background-color: $pu-charcoal;
+        color: #fff;
+        cursor: pointer;
+      }
+}
+
+.pu-button-dark-disabled {
+    height: 60px;
+    width: 140px;
+    font-size: 20px;
+    font-family: $font;
+    font-weight: 300;
+    margin: 10px;
+    border: 1px solid $pu-charcoal;
+    background-color: $pu-charcoal;
+    color: #fff;
+    cursor: pointer;
+}
+
+.user-nav {
     position: absolute;
-    background: no-repeat center center;
-    background-size: cover;
     top: 18px; 
     right: 20px;
-    height: 40px;
-    width: 40px;
+}
+
+.avatar {
     border-radius: 100%;
     border: 1px solid $pu-bright-blue;
+    height: 40px;
+    width: 40px;
+    background: no-repeat center center;
+    background-size: cover;
         &:hover {
             cursor: pointer;
         }
+}
+
+.friends-list-item {
+    display: inline-flex;
+    flex-flow: column;
 }
 
 .bert-content {
@@ -121,11 +177,12 @@ li {
 
 a, a:link, a:visited, a:hover {
     text-decoration: none;
+    color: inherit;
 }
 
 
 p {
-    font-size: 18px;
+    font-size: 22px;
     line-height: 1.5;
     color: #000;
 }
@@ -176,19 +233,23 @@ p {
   padding: 20px 10px 20px 60px;
   margin-top: -4%;
   color: #fff;
+  overflow: auto;
 }
 
 .story-author {
   font-size: 18px;
   position: relative; 
   float: right;
+  margin-top: 6px;
   margin-right: 20px;
+  padding-left: 10px;
 }
 
 .story-preview {
   color: #000;
   margin: 2%;
   padding: 10px 10px 10px 50px;
+  overflow: auto;
 }
 
 .story-faves {
@@ -227,17 +288,56 @@ p {
 }
 }
 
+.fave {
+    position: fixed;
+    right: 150px;
+    top: calc(50% + 10px);
+    transition: all 0.5s;
+    &:hover, &:active {
+        fill: $pu-red;
+        transform: scale(1.4);
+        cursor: pointer;
+    }
+}
+
+#post-edit-form {
+    @media screen and (min-width: 600px){
+        max-width: 80vw;
+    }
+}
+
 #post-title, #post-preview {
     border: 1px solid $pu-bright-blue;
 }
 
 .view-post {
+    margin-top: 20px;
+    letter-spacing: 0.02em;
     @media screen and (max-width:699px) { 
   width: 90vw;
     }
     @media screen and (min-width:700px) {
-    width: 450px;
+    margin-left: calc(100% - 80vw);
+    width: 550px;
     }
+}
+
+.post-hero {
+    height: 100vh;
+    width: 100vw;
+    margin-top: -65px;
+    color: white;
+    background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.2), 
+      rgba(0, 0, 0, 0.2)
+    ), no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .dropdown-menu {
@@ -285,8 +385,7 @@ p {
 	font: bold 13px Helvetica, sans-serif;
 	text-transform: uppercase;
 	text-decoration: none;
-	color: #000000;
-	color: rgba( 0, 0, 0, 0.4 );
+	color: rgba( 0, 0, 0, 0.4 ) !important;
 	line-height: 40px;
 	box-shadow: 0 1px 1px rgba( 0, 0, 0, 0.2 );
     &:nth-child( 2 )

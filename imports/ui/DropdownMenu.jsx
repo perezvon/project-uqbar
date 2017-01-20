@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import { browserHistory } from 'react-router'
@@ -15,12 +16,13 @@ export default class DropdownMenu extends Component {
         }) };
     }
     render () {
+        let userProfile = "profile/" + this.props.username;
         return (
         <div className="dropdown-menu" id="user-dropdown-menu">
 		<div className="arrow"></div>
                 <span className="dropdown-username">{this.props.username}</span><span className="whatnot"></span>
-			<Link to="#" className="dropdown-link">Profile <span className="whatnot"></span></Link>
-			<Link to="new" className="dropdown-link">New Post <span className="whatnot"></span></Link>
+			<Link to={userProfile} className="dropdown-link">Profile <span className="whatnot"></span></Link>
+			<Link to="new" className="dropdown-link">New Story <span className="whatnot"></span></Link>
 			<Link to="dashboard" className="dropdown-link">Dashboard <span className="whatnot"></span></Link>
 			<Link to="#" className="dropdown-link" onClick={this.logout}>Logout <span className="whatnot"></span></Link>
 		</div>

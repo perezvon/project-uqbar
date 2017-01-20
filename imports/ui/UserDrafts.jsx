@@ -13,8 +13,9 @@ class UserDrafts extends Component {
     }
     
     render () {
+        let currentUser = this.props.username ? this.props.username + '\'s' : 'Your';
         return (<div>
-        <div className="h2">Your Motherfucking Drafts</div>
+        <div className="h2">{currentUser} Drafts</div>
             {this.drafts()}
                 </div>
         )
@@ -23,12 +24,12 @@ class UserDrafts extends Component {
 
 UserDrafts.propTypes = {
   drafts: PropTypes.array.isRequired,
+    username: PropTypes.string
 };
 
-export default createContainer(() => {
+export default createContainer(({username}) => {
     Meteor.subscribe('posts');
-    let author = Meteor.user().profile.authorname;
-    
+    let author = username ? username : Meteor.user().username;
     return {
         drafts: Posts.find({author: author, published: false}, {sort: {createdAt: -1}}).fetch()
     };

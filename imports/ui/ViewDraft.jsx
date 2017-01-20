@@ -12,6 +12,12 @@ class ViewDraft extends Component {
             editorState: EditorState.createWithContent(body)
         }
     }
+    
+    
+    componentWillMount () {
+        //authentication: read-only if not owner of draft
+    }
+    
     render () {
       const {editorState} = this.state;
         return (

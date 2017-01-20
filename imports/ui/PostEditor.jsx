@@ -1,5 +1,6 @@
 
 import React, { Component, PropTypes } from 'react'
+import { browserHistory } from 'react-router'
 import  { Editor, getCurrentContent, convertToRaw, EditorState } from 'draft-js'
 import { newPost } from '../api/posts/methods'
 
@@ -20,8 +21,16 @@ export default class PostEditor extends Component {
         e.preventDefault();
         console.log(this.state.editorState.getCurrentContent()); //will want to save to localStorage
       }
-      this.publishDraft = () => {
-          Meteor.call('updatePost', this.state.id, {$set: {published: true}});
+      this.publishDraft = (e) => {
+          e.preventDefault();
+          Meteor.call('updatePost', this.state.id, {$set: {published: true}}, (err) => {
+            if (err) {
+                Bert.alert(err.reason, 'danger');
+            } else {
+                Bert.alert("Your post is now published.", 'success');
+                browserHistory.push('/');
+            }
+        });
       }
       this.generateSlug = () => {
           let text = document.getElementById("post-title").value;
@@ -34,13 +43,26 @@ export default class PostEditor extends Component {
           let body = JSON.stringify(convertToRaw(raw));
           let title = document.getElementById("post-title").value;
           let slug = document.getElementById("post-slug").value;
-          let author = Meteor.userId();
+          let author = Meteor.user().username;
           let preview = document.getElementById("post-preview").value;
           let data = {title: title, body: body, author: author, slug: slug, preview: preview};
           if (this.state.id) {
-            Meteor.call('updatePost', this.state.id, data);
+            Meteor.call('updatePost', this.state.id, {$set: data}, (err) => {
+            if (err) {
+                Bert.alert(err.reason, 'danger');
+            } else {
+                Bert.alert("All changes saved.", 'success');
+            }
+        });
           } else {
-            Meteor.call('newPost', data);
+            Meteor.call('newPost', data, (err) => {
+            if (err) {
+                Bert.alert(err.reason, 'danger');
+            } else {
+                Bert.alert("New draft created.", 'success');
+                browserHistory.push('/dashboard');
+            }
+        });
           }
       }
   }
@@ -49,9 +71,14 @@ export default class PostEditor extends Component {
             this.setState({
                 id: this.props.current._id,
                 title: this.props.current.title,
-                preview: this.props.current.preview
+                preview: this.props.current.preview,
+                slug: this.props.current.slug
             });
         }
+    }
+    
+    componentDidMount () {
+        document.getElementById("post-slug").value = this.state.slug;
     }
     
   render () {
@@ -80,12 +107,12 @@ export default class PostEditor extends Component {
       />
                     </div>
                         <input
-                className="pu-button"
+                className="pu-button-dark"
                 type="submit"
                 value="Save Draft"
               />
+            <button className="pu-button-dark publish-draft" onClick={this.publishDraft}>Publish Draft</button>
             </form>
-            <button className="pu-button publish-draft" onClick={this.publishDraft}>Publish Draft</button>
                 </div>
         )
   }

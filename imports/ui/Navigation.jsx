@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import Avatar from './Avatar.jsx';
+import React, { Component } from 'react'
+import { Link } from 'react-router'
+import RightNav from './RightNav'
 
 export default class Navigation extends Component {
     render () {
@@ -8,10 +8,11 @@ export default class Navigation extends Component {
             <div className="header">
                 <ul>
                     <Link to="/"><li>home</li></Link>
+                    <Link to="about"><li>about</li></Link>
                     <Link to="dashboard"><li>dashboard</li></Link>
-                    <Link to="new"><li>new post</li></Link>
+                    <Link to="new"><li>new story</li></Link>
                 </ul>
-                <Avatar auth={this.props.auth}/>
+                <RightNav auth={this.props.auth}/>
             </div>
         )
     }

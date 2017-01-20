@@ -25,15 +25,18 @@ let PostsSchema = new SimpleSchema({
       }
     }
   },
+    "version": {
+      type: Number,
+        label: "The version number of a draft",
+        autoValue() {
+            if (this.isInsert) {
+                return 1;
+            }
+        }
+    },
     "author": {
     type: String,
-    label: "The ID of the author of this post.",
-    autoValue() {
-      let user = Meteor.users.findOne( { _id: this.userId } );
-      if ( user ) {
-        return user.profile.authorname;
-      }
-    }
+    label: "The ID of the author of this post."
   },
   "title": {
     type: String,
@@ -85,7 +88,7 @@ let PostsSchema = new SimpleSchema({
     },
     "updatedAt": {
     type: Date,
-    label: "The date this post was last updated on.",
+    label: "The date this post was last updated.",
         optional: true,
     autoValue () {
             if ( this.isUpdate ) {
@@ -93,6 +96,11 @@ let PostsSchema = new SimpleSchema({
             } 
     }
   },
+    "image": {
+      type: String,
+        label: "The image for this post.",
+        defaultValue: ""
+    },
     "faves": {
         type: Number,
         label: "The number of faves.",

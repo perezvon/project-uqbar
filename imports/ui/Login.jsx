@@ -36,7 +36,7 @@ export default class Login extends Component {
                         <label htmlFor="login-password">Password:</label> 
                         <input type="password" id="login-password" className="form-input" required />
                     </div>
-                    <input type="submit" className="pu-button" value="Login" />
+                    <input type="submit" className="pu-button-light" value="Login" />
                 </form>
                 <div className="register-link">New User? <Link to="register">Register</Link></div>
             </div>
