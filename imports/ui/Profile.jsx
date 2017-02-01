@@ -9,7 +9,7 @@ class Profile extends Component {
         super (props);
         this.addFriend = () => {
             console.log(this.state);
-            if (this.state.potentialFriend) Meteor.call('sendFriendRequest', this.state.user, this.state.potentialFriend);
+            if (this.state.currentUserProfile) Meteor.call('sendFriendRequest', this.state.loggedInUser, this.state.currentUserProfile);
             $('#addFriend').html('Request Sent').prop('disabled', true).removeClass('pu-button-dark').addClass('pu-button-dark-disabled');;
         };
     }
@@ -41,6 +41,7 @@ class Profile extends Component {
                 width: 100,
                 height: 100,
                 border: "1px solid black",
+                borderRadius: "100%",
                 background: "no-repeat center center",
                 backgroundSize: "cover",
                 backgroundImage: "url(" + this.props.user[0].avatar + ")"

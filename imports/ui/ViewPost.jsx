@@ -30,6 +30,7 @@ class ViewPost extends Component {
         let postHeroStyle = {}; 
             this.props.current ? postHeroStyle.backgroundImage = 'url("' + this.props.current.image + '")': postHeroStyle.backgroundColor = '#999';
       const {editorState} = this.state;
+        let fave = this.props.draft == true ? '' : <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fave" onClick={this.fave}><path d="M12 .288l2.833 8.718h9.167l-7.417 5.389 2.833 8.718-7.416-5.388-7.417 5.388 2.833-8.718-7.416-5.389h9.167z"/></svg>;
         let authorLink = "/profile/" + this.props.params.username;
         return (
             <div className="flex-row">
@@ -39,7 +40,7 @@ class ViewPost extends Component {
                 </div>
                 <div className="view-post">
                 <Editor editorState={editorState} readOnly='true' />
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fave" onClick={this.fave}><path d="M12 .288l2.833 8.718h9.167l-7.417 5.389 2.833 8.718-7.416-5.388-7.417 5.388 2.833-8.718-7.416-5.389h9.167z"/></svg>
+                {fave}
                 </div>
             </div>
         )

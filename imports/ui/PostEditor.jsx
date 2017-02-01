@@ -103,6 +103,7 @@ export default class PostEditor extends Component {
           className="editor" 
           editorState={editorState} 
           onChange={this.onChange}
+          readOnly={this.props.readOnly}
           placeholder="Start writing..."
       />
                     </div>

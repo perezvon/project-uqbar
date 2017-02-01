@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { createContainer } from 'meteor/react-meteor-data'
 import  { Editor, EditorState, convertFromRaw } from 'draft-js'
 import { Posts } from '../api/posts/posts.js'
-import PostEditor from './PostEditor';
+import PostEditor from './PostEditor'
+import ViewPost from './ViewPost'
 
 class ViewDraft extends Component {
     constructor (props) {
@@ -15,17 +16,26 @@ class ViewDraft extends Component {
     
     
     componentWillMount () {
-        //authentication: read-only if not owner of draft
+        const readOnly = this.props.params.username == Meteor.user().username ? false : true;
+        this.setState({
+            readOnly: readOnly
+        });
     }
     
     render () {
       const {editorState} = this.state;
-        return (
-            <div>
-                <div className="h2">Edit Draft</div>
-                <PostEditor current={this.props.current} editorState={editorState} />
-            </div>
-        )
+        if (this.state.readOnly) {
+            return (
+                <ViewPost current={this.props.current} editorState={editorState} draft='true' />
+            )
+        } else {
+            return (
+                <div>
+                    <div className="h2">Edit Draft</div>
+                    <PostEditor current={this.props.current} editorState={editorState} readOnly={this.state.readOnly} />
+                </div>
+            )
+        }
     }
 }
 

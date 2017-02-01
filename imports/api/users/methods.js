@@ -3,8 +3,10 @@ import { Profiles } from './users'
 
 Meteor.methods({ 
     sendFriendRequest (activeUser, potentialFriend) {
-        Profiles.update({username: activeUser},{$addToSet: {friends: {user: potentialFriend, status: 'sent'}}});
-        Profiles.update({username: potentialFriend},{$addToSet: {'friends': {user: activeUser, status: 'request'}}});  
+        let test = Profiles.find({username: activeUser}).fetch();
+        console.log(test);
+        //Profiles.update({username: activeUser},{$addToSet: {friends: {user: potentialFriend, status: 'sent'}}});
+        //Profiles.update({username: potentialFriend},{$addToSet: {'friends': {user: activeUser, status: 'request'}}});  
     },
 
     acceptFriendRequest (activeUser, newFriend) {
@@ -16,7 +18,11 @@ Meteor.methods({
         Profiles.update({username: activeUser, 'friends.user': nonFriend}, {$set: {'friends.$.status': 'ignored'}});
     },
     
+    newProfile (user) {
+        Profiles.insert({username: user});
+    },
+    
     updateProfile (user, data){
         Profiles.update(user, data);
-    },
+    }
 });

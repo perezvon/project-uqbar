@@ -33,7 +33,10 @@ let ProfilesSchema = new SimpleSchema({
     },
   "avatar": {
     type: String,
-    label: "The url of the user's avatar."
+    label: "The url of the user's avatar.",
+      autoValue() {
+          if (this.isInsert) return 'https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png';
+      }
   },
     "bio": {
         type: String,
@@ -41,7 +44,10 @@ let ProfilesSchema = new SimpleSchema({
     },
     "friends": {
         type: [Object],
-        label: "A collection of friend relationships."
+        label: "A collection of friend relationships.",
+        autoValue() {
+            if (this.isInsert) return [];
+        }
     }
     
 });

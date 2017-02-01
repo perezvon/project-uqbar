@@ -26,6 +26,7 @@ export default class Register extends Component {
           error: err.reason
         });
       } else {
+          Meteor.call('newProfile', username);
           Meteor.loginWithPassword(email, password, (err) => {
              if (err) {
                 this.setState({
