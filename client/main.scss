@@ -416,3 +416,37 @@ p {
 .hidden {
     display: none;
 }
+
+.draft-overlay {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.3;
+}
+
+.draft-overlay-text { 
+    color: lightgrey;
+    font-size: 50vmin;
+    text-align: center;
+    transform:rotate(320deg);
+    -webkit-transform:rotate(320deg);
+}
+
+.new-notification-bubble {
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  position: absolute;
+  top: -15px;
+  right: -8px;
+  width: 18px;
+  border-radius: 100%;
+  height: 18px;
+  z-index: 5;
+  padding: 2px;
+  background: rgb(166,0,0);
+    transition: all $transition-time ease-in-out;
+    &.active {
+      transform: scale(0);
+    }
+}

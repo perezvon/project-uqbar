@@ -48,6 +48,16 @@ let ProfilesSchema = new SimpleSchema({
         autoValue() {
             if (this.isInsert) return [];
         }
+    },
+    "friends.$.user": {
+        type: String,
+        label: "username of potential friend",
+        min: 1
+    },
+    "friends.$.status": {
+        type: String,
+        label: "friendship status",
+        min: 1
     }
     
 });

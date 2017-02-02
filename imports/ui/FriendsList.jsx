@@ -10,9 +10,9 @@ class FriendsList extends Component {
     friends () {
         if (this.props.friends) {
             let userProfile = 'profile/';
-        return this.props.friends.map(friend => (
+        return this.props.friends.filter(each => {return each.status == 'friends'}).map((friend, index) => (
             userProfile = 'profile/' + friend.user,
-            <Link to={userProfile}><Avatar key={friend.user} username={friend.user} /></Link>
+            <Link key={index} to={userProfile}><Avatar key={index} username={friend.user} /></Link>
         ));
         } else {
             return <div>no friends yet</div>

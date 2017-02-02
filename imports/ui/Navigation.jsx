@@ -9,8 +9,6 @@ export default class Navigation extends Component {
                 <ul>
                     <Link to="/"><li>home</li></Link>
                     <Link to="about"><li>about</li></Link>
-                    <Link to="dashboard"><li>dashboard</li></Link>
-                    <Link to="new"><li>new story</li></Link>
                 </ul>
                 <RightNav auth={this.props.auth}/>
             </div>

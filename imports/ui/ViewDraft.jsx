@@ -3,7 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data'
 import  { Editor, EditorState, convertFromRaw } from 'draft-js'
 import { Posts } from '../api/posts/posts.js'
 import PostEditor from './PostEditor'
-import ViewPost from './ViewPost'
+import ViewFriendDraft from './ViewFriendDraft'
 
 class ViewDraft extends Component {
     constructor (props) {
@@ -26,13 +26,13 @@ class ViewDraft extends Component {
       const {editorState} = this.state;
         if (this.state.readOnly) {
             return (
-                <ViewPost current={this.props.current} editorState={editorState} draft='true' />
+                <ViewFriendDraft current={this.props.current} editorState={editorState} draft='true' />
             )
         } else {
             return (
                 <div>
                     <div className="h2">Edit Draft</div>
-                    <PostEditor current={this.props.current} editorState={editorState} readOnly={this.state.readOnly} />
+                    <PostEditor current={this.props.current} editorState={editorState} />
                 </div>
             )
         }

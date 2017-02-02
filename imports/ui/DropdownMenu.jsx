@@ -17,14 +17,15 @@ export default class DropdownMenu extends Component {
     }
     render () {
         let userProfile = "profile/" + this.props.username;
+        let newFriendRequests = this.props.friendReqs ? this.props.friendReqs.map((each, index) => {return <div key={index} className="dropdown-link">{each.user}</div>}) : '';
         return (
         <div className="dropdown-menu" id="user-dropdown-menu">
 		<div className="arrow"></div>
                 <span className="dropdown-username">{this.props.username}</span><span className="whatnot"></span>
-			<Link to={userProfile} className="dropdown-link">Profile <span className="whatnot"></span></Link>
 			<Link to="new" className="dropdown-link">New Story <span className="whatnot"></span></Link>
 			<Link to="dashboard" className="dropdown-link">Dashboard <span className="whatnot"></span></Link>
 			<Link to="#" className="dropdown-link" onClick={this.logout}>Logout <span className="whatnot"></span></Link>
+                {newFriendRequests}
 		</div>
         )
     }

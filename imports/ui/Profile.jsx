@@ -8,9 +8,14 @@ class Profile extends Component {
     constructor(props) {
         super (props);
         this.addFriend = () => {
-            console.log(this.state);
             if (this.state.currentUserProfile) Meteor.call('sendFriendRequest', this.state.loggedInUser, this.state.currentUserProfile);
-            $('#addFriend').html('Request Sent').prop('disabled', true).removeClass('pu-button-dark').addClass('pu-button-dark-disabled');;
+            //to do: if opted in to friend request emails, send new friend request email
+            $('#addFriend').html('Request Sent').prop('disabled', true).removeClass('pu-button-dark').addClass('pu-button-dark-disabled');
+        };
+        this.confirmFriend = () => {
+            if (this.state.currentUserProfile) Meteor.call('acceptFriendRequest', this.state.loggedInUser, this.state.currentUserProfile);
+            $('#confirmFriend').html('Friend Added!').prop('disabled', true).removeClass('pu-button-dark').addClass('pu-button-dark-disabled');
+            //to do: reactively update the page to show the new friend's drafts
         };
     }
     
@@ -22,7 +27,8 @@ class Profile extends Component {
         this.setState({
             loggedInUser: currentUser,
             currentUserProfile: this.props.user[0].username || '',
-            friendsStatus: friendsStatus
+            friendsStatus: friendsStatus,
+            userDrafts: ''
         });
     }
     
@@ -46,15 +52,22 @@ class Profile extends Component {
                 backgroundSize: "cover",
                 backgroundImage: "url(" + this.props.user[0].avatar + ")"
             }
-            let addFriendButton = '', editProfileButton = '', userDrafts = '';
-            if (this.props.user[0].username !== Meteor.user().username) {
+            
+            let addFriendButton = '', confirmFriendButton = '', editProfileButton = '';
+            
+            if (this.props.user[0].username !== Meteor.user().username && this.state.friendsStatus !=='sent') {
                 addFriendButton = <button className="pu-button-dark" id="addFriend" onClick={this.addFriend}>Add Friend</button>;
             }
             if (this.props.user[0].username == Meteor.user().username) {
                 editProfileButton = <button className="pu-button-dark">Edit Profile</button>;
             }
             if (this.state.friendsStatus == 'friends') {
-                userDrafts = <UserDrafts username={this.state.currentUserProfile} />
+                this.setState({
+                userDrafts: <UserDrafts username={this.state.currentUserProfile} />
+                });
+            }
+            if (this.state.friendsStatus == 'sent') {
+                confirmFriendButton = <button className="pu-button-dark" id="confirmFriend" onClick={this.confirmFriend}>Confirm Friend</button>;
             }
         return (
             <div>
@@ -63,7 +76,8 @@ class Profile extends Component {
                 <div style={imgStyle}></div>
                 {editProfileButton}
                 {addFriendButton}
-                {userDrafts}
+                {confirmFriendButton}
+                {this.state.userDrafts}
             </div>
         )
         } else {
