@@ -1,14 +1,10 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import PostEditor from './PostEditor';
 
-export default class NewPost extends Component {
-    render () {
-        return (
+export const NewPost = () => (
             <div>
                 <div className="h2">New Post</div>
                 <PostEditor />
             </div>
         )
-    }
-}

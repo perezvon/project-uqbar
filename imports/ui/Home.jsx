@@ -1,10 +1,8 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import RecentPosts from './RecentPosts'
 import PopularPosts from './PopularPosts'
 
-export default class Home extends Component {
-    render () {
-        return (
+export const Home = () => (
             <div>
                 <div className="flex-row text-center h1">project uqbar</div>
                 <div className="half-width-flex">
@@ -15,5 +13,3 @@ export default class Home extends Component {
                 </div>
             </div>
         )
-    }
-}

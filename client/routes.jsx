@@ -2,13 +2,13 @@ import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import App from '../imports/ui/App'
-import Home from '../imports/ui/Home'
+import {Home} from '../imports/ui/Home'
 import LandingPage from '../imports/ui/LandingPage'
 import LandingHero from '../imports/ui/LandingHero'
 import Register from '../imports/ui/Register'
 import Login from '../imports/ui/Login'
 import Dashboard from '../imports/ui/Dashboard'
-import NewPost from '../imports/ui/NewPost'
+import {NewPost} from '../imports/ui/NewPost'
 import ViewPost from '../imports/ui/ViewPost'
 import ViewDraft from '../imports/ui/ViewDraft'
 import About from '../imports/ui/About'
