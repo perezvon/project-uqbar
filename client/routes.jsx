@@ -22,6 +22,12 @@ const requireAuth = (nextState, replace) => {
   }
 }
 
+const firstVisitCheck = (nextState, replace) => {
+	if (!Meteor.user() && !browserHistory) {
+		replace({ pathname: 'join' })
+	}
+}
+
 export const renderRoutes = () => (
     <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
         <Route path="join" component={LandingPage} >
@@ -29,7 +35,7 @@ export const renderRoutes = () => (
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
         </Route>
-        <Route path="/" component={App} >
+        <Route path="/" component={App} onEnter={firstVisitCheck}>
             <IndexRoute component={Home} />
             <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
             <Route path="new" component={NewPost} onEnter={requireAuth} />

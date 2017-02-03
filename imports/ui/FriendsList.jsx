@@ -7,7 +7,7 @@ import Avatar from './Avatar'
 
 
 class FriendsList extends Component {
-    friends () {
+    friends = () => {
         if (this.props.friends) {
             let userProfile = 'profile/';
         return this.props.friends.filter(each => {return each.status == 'friends'}).map((friend, index) => (
@@ -23,7 +23,7 @@ class FriendsList extends Component {
         return (
             <div>
                 <div className="h2">Your Friends</div>
-                {this.friends()}
+                {this.friends}
             </div>
         )
     }
