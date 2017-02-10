@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { browserHistory } from 'react-router'
 import  { Editor, getCurrentContent, convertToRaw, EditorState } from 'draft-js'
 import { newPost } from '../api/posts/methods'
+import ImageDropzone from './ImageDropzone'
 
 export default class PostEditor extends Component {
   constructor (props) {  
@@ -45,7 +46,9 @@ export default class PostEditor extends Component {
           let slug = document.getElementById("post-slug").value;
           let author = Meteor.user().username;
           let preview = document.getElementById("post-preview").value;
-          let data = {title: title, body: body, author: author, slug: slug, preview: preview};
+		  let image = this.state.image || '/jamavatar.JPG';
+		  let version = this.state.version+1;
+          let data = {title: title, body: body, author: author, slug: slug, image: image, preview: preview, version: version};
           if (this.state.id) {
             Meteor.call('updatePost', this.state.id, {$set: data}, (err) => {
             if (err) {
@@ -72,19 +75,24 @@ export default class PostEditor extends Component {
                 id: this.props.current._id,
                 title: this.props.current.title,
                 preview: this.props.current.preview,
-                slug: this.props.current.slug
+                slug: this.props.current.slug,
+				image: this.props.current.image,
+				version: this.props.current.version
             });
         }
     }
     
     componentDidMount () {
+		console.log(this.state)
         document.getElementById("post-slug").value = this.state.slug;
     }
     
   render () {
     const {editorState} = this.state;
+	  const image = this.state.image || '';
     return (
-        <div>
+        <div style={{backgroundImage: image}}>
+			<ImageDropzone />
             <form id="post-edit-form" onSubmit={this.handleSubmit}>
         <div className="form-control">
             <label htmlFor="post-title">Title: </label><br/>

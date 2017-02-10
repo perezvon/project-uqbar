@@ -28,7 +28,6 @@ PopularPosts.propTypes = {
 };
 
 export default createContainer(() => {
-    Meteor.subscribe('posts');
     return {
         posts: Posts.find({published: true}, {sort: {faves: -1}, limit: 9}).fetch()
     };

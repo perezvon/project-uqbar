@@ -16,17 +16,16 @@ export default class Register extends Component {
     let username = document.getElementById("signup-username").value;
     let email = document.getElementById("signup-email").value;
     let password = document.getElementById("signup-password").value;
-    let profile = {};
-    profile.authorname = document.getElementById("signup-authorname").value;
-    profile.newsletter = document.getElementById("signup-newsletter").value;
+    let authorname = document.getElementById("signup-authorname").value;
+    let newsletter = document.getElementById("signup-newsletter").value;
     this.setState({error: "test"});
-    Accounts.createUser({email: email, username: username, password: password, profile: profile}, (err) => {
+    Accounts.createUser({email: email, username: username, password: password}, (err) => {
       if (err) {
         this.setState({
           error: err.reason
         });
       } else {
-          Meteor.call('newProfile', username);
+          Meteor.call('newProfile', {username: username, authorname: authorname, newsletter: newsletter});
           Meteor.loginWithPassword(email, password, (err) => {
              if (err) {
                 this.setState({

@@ -19,7 +19,8 @@ export default class ViewFriendDraft extends Component {
                 id: this.props.current._id,
                 image: this.props.current.image,
                 title: this.props.current.title,
-                author: this.props.current.author
+                author: this.props.current.author,
+				version: this.props.current.version
             })
         }
     }
@@ -36,11 +37,12 @@ export default class ViewFriendDraft extends Component {
                         <div className="draft-overlay-text">DRAFT</div>
                     </div>
                 <div className="post-hero" style={postHeroStyle}>
-                    <div className="h2">{this.state.title} (version 5)</div>
+                    <div className="h2">{this.state.title} (version {this.state.version})</div>
                     <div className="h3">by: <Link to={authorLink}>{this.state.author}</Link></div>
                 </div>
                 <div className="view-post">
                 <Editor editorState={editorState} readOnly='true' />
+					<Chat id={this.state.id}/>
                 </div>
             </div>
         )

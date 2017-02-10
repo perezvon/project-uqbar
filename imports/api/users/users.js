@@ -40,7 +40,8 @@ let ProfilesSchema = new SimpleSchema({
   },
     "bio": {
         type: String,
-        label: "The user's bio."
+        label: "The user's bio.",
+		defaultValue: "add your bio"
     },
     "friends": {
         type: [Object],

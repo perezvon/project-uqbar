@@ -33,13 +33,14 @@ li {
 .hero {
     height: 100vh;
     color: white;
-    background:
+    background: no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+	background-image: 
     linear-gradient(
       rgba(0, 0, 0, 0.2), 
       rgba(0, 0, 0, 0.2)
-    ), url(https://images.unsplash.com/photo-1464621922360-27f3bf0eca75?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1b0aa3802706c803f1c2f261d761f584) no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
+    ), url(https://images.unsplash.com/photo-1464621922360-27f3bf0eca75?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1b0aa3802706c803f1c2f261d761f584); 
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
@@ -78,7 +79,7 @@ li {
 }
 
 .h1 {
-    font-size: 25vh;
+    font-size: 4rem;
     padding: 10px;
 }
 
@@ -90,7 +91,6 @@ li {
 .h3 {
     font-size: 3vh;
     padding: 20px;
-    padding-left: 100px;
 }
 
 .content {
@@ -288,16 +288,43 @@ p {
 }
 }
 
-.fave {
-    position: fixed;
-    right: 150px;
-    top: calc(50% + 10px);
-    transition: all 0.5s;
-    &:hover, &:active {
-        fill: $pu-red;
-        transform: scale(1.4);
-        cursor: pointer;
-    }
+.social {
+	background: $pu-blue;
+	font-size: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	@media screen and (max-width: 599px) {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		flex-flow: row nowrap;
+		padding-left: 20px;
+		padding-right: -20px;
+	} 
+	@media screen and (min-width: 600px) {
+		position: fixed;
+		right: 120px;
+		top: calc(50% + 10px);
+		width: 40px;
+		height: 200px;
+		flex-flow: column nowrap;
+	}
+}
+
+.social-button {
+	transition: all 0.5s;
+		&:active {
+			color: $pu-red;
+		}
+	
+	@media screen and (min-width: 600px) {
+		&:hover, &:active {
+			color: $pu-red;
+			transform: scale(1.4);
+			cursor: pointer;
+		}
+	}
 }
 
 #post-edit-form {
@@ -327,17 +354,17 @@ p {
     width: 100vw;
     margin-top: -65px;
     color: white;
-    background:
-    linear-gradient(
-      rgba(0, 0, 0, 0.2), 
-      rgba(0, 0, 0, 0.2)
-    ), no-repeat center center;
+    background: no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     align-items: center;
+}
+
+.post-author {
+	padding-left: 100px;
 }
 
 .dropdown-menu {
@@ -430,6 +457,7 @@ p {
     text-align: center;
     transform:rotate(320deg);
     -webkit-transform:rotate(320deg);
+	user-select: none;
 }
 
 .new-notification-bubble {

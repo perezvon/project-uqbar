@@ -3,11 +3,12 @@ import { Link } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data'
 import  { Editor, EditorState, convertFromRaw } from 'draft-js'
 import { Posts } from '../api/posts/posts.js'
+import {SocialButtons} from './SocialButtons'
 
 class ViewPost extends Component {
     constructor (props) {
         super(props);  
-        let body = convertFromRaw(JSON.parse(this.props.current.body));
+        const body = convertFromRaw(JSON.parse(this.props.current.body));
         this.state = {
             editorState: EditorState.createWithContent(body)
         }
@@ -15,32 +16,48 @@ class ViewPost extends Component {
              //let currentUserId = Meteor.user().username;
             Meteor.call('updatePost', this.state.id, {$inc: {faves: 1} /*, $addToSet: {favorite: currentUserId}*/});
         }
+		this.tweet = () => {
+			
+		}
+		this.fb = () => {
+			
+		}
     }
     
     componentWillMount () {
-        if (this.props.current) {
+		const {current} = this.props;
+        if (current) {
             this.setState({
-                id: this.props.current._id,
-                image: this.props.current.image
+                id: current._id,
+                image: current.image
             })
         }
     }
+	
+	componentDidMount () {
+		const vh = window.innerHeight / 2;
+		$(window).on('scroll', e => {
+			if ($(window).scrollTop() > vh) $('.social').removeClass('hidden')
+			else $('.social').addClass('hidden')
+		})
+	}
     
     render () {
+		const {current, dataReady, params} = this.props;
         let postHeroStyle = {}; 
-            this.props.current ? postHeroStyle.backgroundImage = 'url("' + this.props.current.image + '")': postHeroStyle.backgroundColor = '#999';
+            current ? postHeroStyle.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("' + current.image + '")': postHeroStyle.backgroundColor = '#999';
       const {editorState} = this.state;
-        let fave = this.props.draft == true ? '' : <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fave" onClick={this.fave}><path d="M12 .288l2.833 8.718h9.167l-7.417 5.389 2.833 8.718-7.416-5.388-7.417 5.388 2.833-8.718-7.416-5.389h9.167z"/></svg>;
-        let authorLink = "/profile/" + this.props.params.username;
+        
+        const authorLink = "/profile/" + params.username;
         return (
             <div className="flex-row">
                 <div className="post-hero" style={postHeroStyle}>
-                    <div className="h2">{this.props.current.title}</div>
-                    <div className="h3">by: <Link to={authorLink}>{this.props.current.author}</Link></div>
+                    <div className="h2">{current.title}</div>
+                    <div className="h3 post-author">by: <Link to={authorLink}>{current.author}</Link></div>
                 </div>
                 <div className="view-post">
                 <Editor editorState={editorState} readOnly='true' />
-                {fave}
+					{!current.draft ? <SocialButtons draft={current.draft} fave={this.fave} tweet={this.tweet} fb={this.fb}/> : ''}
                 </div>
             </div>
         )
@@ -54,7 +71,10 @@ ViewPost.PropTypes = {
 };
 
 export default createContainer(({params}) => {
+	const handle = Meteor.subscribe('posts');
+	const dataReady = handle.ready();
     return {
+		dataReady,
         current: Posts.findOne({slug: params.username + '/' + params.slug})
     };
 }, ViewPost);

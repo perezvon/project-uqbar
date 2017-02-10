@@ -17,7 +17,13 @@ Meteor.methods({
     },
     
     newProfile (user) {
-        Profiles.insert({username: user});
+        Profiles.insert(user);
+		Email.send({
+		  to: Meteor.user().emails[0].address,
+		  from: "projectuqbar@gmail.com",
+		  subject: "[project uqbar] Welcome to the project.",
+		  text: "We're happy to have you.",
+		});
     },
     
     updateProfile (user, data){

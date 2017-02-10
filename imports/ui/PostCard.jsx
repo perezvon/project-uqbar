@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
+import FontAwesome from 'react-fontawesome'
 import numeral from 'numeral'
 
 export default class PostCard extends Component {
@@ -22,7 +23,7 @@ export default class PostCard extends Component {
     <div className="story-preview">
       {this.props.preview}
        <div className="story-faves">
-      <img src="/star.svg" /> {faves}
+      <FontAwesome name="star" /> {faves}
       </div>
       </div>
       

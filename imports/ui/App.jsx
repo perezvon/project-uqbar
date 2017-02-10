@@ -4,8 +4,9 @@ import { browserHistory } from 'react-router'
 import LandingPage from './LandingPage'
 import Navigation from './Navigation'
 import Loading from 'react-loading'
+import { Profiles } from '../api/users/users'
 
-export default class App extends Component {
+class App extends Component {
     constructor(props) {
         super(props);
         this.state = this.getMeteorData();
@@ -23,7 +24,7 @@ export default class App extends Component {
             browserHistory.push('join');
         }
     }
-    
+	
     componentDidUpdate (prevProps, prevState) {
         if (!this.state.isAuthenticated) {
             browserHistory.push('login');
@@ -35,25 +36,34 @@ export default class App extends Component {
         Meteor.logout();
         browserHistory.push('login');
     }
+	
+	
     
     render () {
-       /* let subscribed = Meteor.subscribe('posts');
-        let loaded = subscribed.ready();
-        if (!loaded) {
+       const {currentUser, userProfile, profileDataLoaded, postsDataLoaded, children} = this.props;
             return (
-                <div className="flex-container">
-                    <Navigation auth={this.state.isAuthenticated} />
-                    <Loading type='cylon' color='#000' />
-                </div>
-            )
-        } else { */
-            return (
-                <div className="flex-container">
-                    <Navigation auth={this.state.isAuthenticated} />
-                    {this.props.children}
-                </div>
+				<div>
+				{currentUser && profileDataLoaded && postsDataLoaded ?
+				<div className="flex-container">
+					<Navigation auth={this.state.isAuthenticated} currentUser={currentUser} userProfile={userProfile[0]} />
+						{children} </div>:
+						<div className="flex-container"><Loading type='cylon' color='#000' /></div>
+				}
+					</div>
             )
        // }
     }
 }
 
+export default createContainer(() => {
+    const profileHandle = Meteor.subscribe('profiles');
+	const profileDataLoaded = profileHandle.ready();
+	const postsHandle = Meteor.subscribe('posts');
+	const postsDataLoaded = postsHandle.ready();
+    return {
+		profileDataLoaded,
+		postsDataLoaded,
+		currentUser: Meteor.user(),
+        userProfile: profileDataLoaded ? Profiles.find({username: Meteor.user().username}).fetch() : undefined
+    };
+}, App);
