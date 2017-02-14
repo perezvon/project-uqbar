@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import { createContainer } from 'meteor/react-meteor-data'
 import { Profiles } from '../api/users/users'
-import Avatar from './Avatar'
+import {Avatar} from './Avatar'
 
 
 class FriendsList extends Component {

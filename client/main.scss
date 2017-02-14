@@ -19,6 +19,7 @@ body {
   width: 100vw;
   height: 65px;
     padding-bottom: 15px;
+	z-index: 999;
 }
 
 li {
@@ -93,6 +94,10 @@ li {
     padding: 20px;
 }
 
+.small-text {
+	font-size: 14px;
+}
+
 .content {
     color: #000;
     height: 100vh;
@@ -163,6 +168,11 @@ li {
         &:hover {
             cursor: pointer;
         }
+}
+
+.avatar-small {
+    height: 20px;
+    width: 20px;
 }
 
 .friends-list-item {
@@ -289,30 +299,29 @@ p {
 }
 
 .social {
-	background: $pu-blue;
 	font-size: 40px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	@media screen and (max-width: 599px) {
+		background: $pu-blue-transparent;
 		position: fixed;
 		bottom: 0;
 		width: 100%;
 		flex-flow: row nowrap;
-		padding-left: 20px;
-		padding-right: -20px;
 	} 
 	@media screen and (min-width: 600px) {
 		position: fixed;
-		right: 120px;
+		right: 60px;
 		top: calc(50% + 10px);
-		width: 40px;
+		width: 44px;
 		height: 200px;
 		flex-flow: column nowrap;
 	}
 }
 
 .social-button {
+	color: #666;
 	transition: all 0.5s;
 		&:active {
 			color: $pu-red;

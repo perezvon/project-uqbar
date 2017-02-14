@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 import { createContainer } from 'meteor/react-meteor-data'
 import { Profiles } from '../api/users/users'
 import UserDrafts from './UserDrafts'
@@ -37,12 +38,12 @@ class Profile extends Component {
     
     componentDidMount () {
         if (this.state.friendsStatus) $('#addFriend').prop('disabled', true).removeClass('pu-button-dark').addClass('pu-button-dark-disabled');
-        if (this.state.friendsStatus == 'request' || this.state.friendsStatus == 'ignored') {
+        if (this.state.friendsStatus === 'request' || this.state.friendsStatus === 'ignored') {
             $('#addFriend').html('Request Sent');
-        } else if (this.state.friendsStatus == 'friends') {
+        } else if (this.state.friendsStatus === 'friends') {
             $('#addFriend').html('Friends');
         }
-		if (this.state.friendsStatus == 'friends') {
+		if (this.state.friendsStatus === 'friends') {
                 this.setState({
                 userDrafts: <UserDrafts username={this.state.currentUserProfile} />
                 });
@@ -68,7 +69,8 @@ class Profile extends Component {
                 addFriendButton = <button className="pu-button-dark" id="addFriend" onClick={this.addFriend}>Add Friend</button>;
             }
             if (userProfile.username == Meteor.user().username) {
-                editProfileButton = <button className="pu-button-dark">Edit Profile</button>;
+				const profileAddress = "/profile/" + userProfile.username + "/edit"
+                editProfileButton = <Link to={profileAddress}><button className="pu-button-dark">Edit Profile</button></Link>;
             }
             if (this.state.friendsStatus == 'sent') {
                 confirmFriendButton = <button className="pu-button-dark" id="confirmFriend" onClick={this.confirmFriend}>Confirm Friend</button>;

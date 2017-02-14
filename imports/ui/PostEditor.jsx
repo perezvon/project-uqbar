@@ -83,7 +83,6 @@ export default class PostEditor extends Component {
     }
     
     componentDidMount () {
-		console.log(this.state)
         document.getElementById("post-slug").value = this.state.slug;
     }
     

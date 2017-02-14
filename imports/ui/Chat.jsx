@@ -2,10 +2,11 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react'
 import { createContainer } from 'meteor/react-meteor-data'
 import { Chats } from '../api/chats/chats'
+import { ChatComment } from './ChatComment'
 
 class Chat extends Component {
 	state = {
-		chats: []
+		chats: this.props.chats
 	}
 	
 	handleChatToggle = () => {
@@ -45,9 +46,8 @@ class Chat extends Component {
 	}
 	
     render () {
-		console.log(this.state.chats)
-		const chats = this.state.chats.map(chat => <div key={chat.post_id}>{chat.name} ({chat.date}): {chat.comment}</div>)
-		console.log(chats)
+		const {chats} = this.props;
+		const renderChats = chats.map((chat, index) => <ChatComment key={index} chat={chat} />)
         return (
             <div className="chat">
                 <div id="chat-toggle" onClick={this.handleChatToggle}>
@@ -55,7 +55,7 @@ class Chat extends Component {
                       <span className="chat-line chat-line-2"></span>
                 </div>
                 <div className="chat-container">
-                  {chats}
+                  {renderChats}
                 </div>
                 <form className="chat-input-container" onSubmit={this.handleSubmit}>
                     <input className="chat-input" id="comment"></input>

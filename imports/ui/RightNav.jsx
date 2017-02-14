@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Meteor } from 'meteor/meteor'
 import DropdownMenu from './DropdownMenu'
-import Avatar from './Avatar'
+import {Avatar} from './Avatar'
 import { Profiles } from '../api/users/users'
 import AlertBubble from './AlertBubble'
 
@@ -29,7 +29,6 @@ export default class RightNav extends Component {
           this.setState({
 			  alertBubble: <AlertBubble number={this.state.numReqs} />
 		  });
-          
       }
 	}
   render () {

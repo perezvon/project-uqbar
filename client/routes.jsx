@@ -15,6 +15,7 @@ import About from '../imports/ui/About'
 import Profile from '../imports/ui/Profile'
 import RecentPosts from '../imports/ui/RecentPosts'
 import NotFoundPage from '../imports/ui/NotFoundPage'
+import EditProfile from '../imports/ui/EditProfile'
 
 const requireAuth = (nextState, replace) => {
   if (!Meteor.user()) {
@@ -41,8 +42,9 @@ export const renderRoutes = () => (
             <Route path="new" component={NewPost} onEnter={requireAuth} />
             <Route path="about" component={About} />
             <Route path="/profile/:username" component={Profile} />
+			<Route path="/profile/:username/edit" component={EditProfile} onEnter={requireAuth} />
             <Route path="/:username/:slug" component={ViewPost} />
-            <Route path="/:username/:slug/draft" component={ViewDraft} />
+            <Route path="/:username/:slug/draft" component={ViewDraft} onEnter={requireAuth} />
             <Route path="*" component={NotFoundPage} />
         </Route>
         <Route path="*" component={NotFoundPage} />

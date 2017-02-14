@@ -4,6 +4,7 @@ import  { Editor, EditorState, convertFromRaw } from 'draft-js'
 import { Posts } from '../api/posts/posts.js'
 import PostEditor from './PostEditor'
 import ViewFriendDraft from './ViewFriendDraft'
+import Chat from './Chat'
 
 class ViewDraft extends Component {
     constructor (props) {
@@ -18,13 +19,15 @@ class ViewDraft extends Component {
     componentWillMount () {
         const readOnly = this.props.params.username == Meteor.user().username ? false : true;
         this.setState({
-            readOnly: readOnly
+            readOnly: readOnly,
+			id: this.props.current._id
         });
     }
     
     render () {
-      const {editorState} = this.state;
-        if (this.state.readOnly) {
+      const {editorState, id, readOnly} = this.state;
+		console.log(id)
+        if (readOnly) {
             return (
                 <ViewFriendDraft current={this.props.current} editorState={editorState} draft='true' />
             )
@@ -33,6 +36,7 @@ class ViewDraft extends Component {
                 <div>
                     <div className="h2">Edit Draft</div>
                     <PostEditor current={this.props.current} editorState={editorState} />
+					<Chat id={id} />
                 </div>
             )
         }
