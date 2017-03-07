@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor'
-import { Profiles } from '../../api/users/users'
+import { Profiles } from '../imports/api/users/users'
 
 export const createNewProfiles = () => Meteor.users.find().fetch().forEach(user => {
 	console.log(user.username);
