@@ -9,7 +9,6 @@ import {Avatar} from './Avatar'
 class FriendsList extends Component {
     friends = () => {
 		const {friends} = this.props;
-		console.log(friends);
         if (friends) {
             let userProfile = 'profile/';
         return friends.filter(each => {return each.status === 'friends'}).map((friend, index) => (
