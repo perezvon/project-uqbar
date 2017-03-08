@@ -24,6 +24,7 @@ export default class Register extends Component {
         this.setState({
           error: err.reason
         });
+		  console.log(this.state)
       } else {
           Meteor.call('newProfile', {username: username, authorname: authorname, newsletter: newsletter});
           Meteor.loginWithPassword(email, password, (err) => {
@@ -31,6 +32,7 @@ export default class Register extends Component {
                 this.setState({
                 error: err.reason
                 });
+				 console.log(this.state)
              } else { 
                 browserHistory.push('/');
                 Bert.alert( 'Registration successful! Welcome to uqbar, ' + username + '.', 'success');
